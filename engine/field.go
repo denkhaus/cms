@@ -28,7 +28,7 @@ func (e *Engine) IsFieldPresent(name string) (bool, error) {
 }
 
 ////////////////////////////////////////////////////////////////////////////////
-func (e *Engine) FieldCreate(typeName string, fieldName string) error {
+func (e *Engine) FieldCreate(typeField, tp string) error {
 	if ok, err := e.IsTypePresent(typeName); err != nil {
 		return err
 	} else if !ok {
