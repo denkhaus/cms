@@ -9,6 +9,7 @@ import (
 
 type Type struct {
 	TypeRecord
+	Engine *Engine
 }
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -30,6 +31,27 @@ func (e *Engine) IsTypePresent(name string) (bool, error) {
 	}
 
 	return false, nil
+}
+
+////////////////////////////////////////////////////////////////////////////////
+func (e *Engine) TypeLoad(name string) (*Type, error) {
+	if ok, err := e.IsTypePresent(name); err != nil {
+		return nil, err
+	} else if !ok {
+		return nil, fmt.Errorf("Types::TypeLoad::Type %s is not available", name)
+	}
+
+	sess, coll := e.GetSystemSession("types")
+	defer sess.Close()
+
+	query := coll.Find(bson.M{"nm": name})
+
+	tp := Type{}
+	if err := query.One(&tp.TypeRecord); err != nil {
+		return nil, fmt.Errorf("Types::TypeLoad::%s", err.Error())
+	}
+
+	return &tp, nil
 }
 
 ////////////////////////////////////////////////////////////////////////////////

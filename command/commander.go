@@ -29,6 +29,7 @@ func NewCommander(cnf *engine.Config, app *cli.App) (*Commander, error) {
 	}
 
 	cmd.NewTypeCommand()
+	cmd.NewFieldCommand()
 	return cmd, nil
 }
 

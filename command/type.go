@@ -8,7 +8,7 @@ import (
 )
 
 ////////////////////////////////////////////////////////////////////////////////
-func (c *Commander) NewTypeCommand() {
+func (c *Commander) NewFieldCommand() {
 	c.Register(cli.Command{
 		Name:  "type",
 		Usage: "Manage cms types.",
